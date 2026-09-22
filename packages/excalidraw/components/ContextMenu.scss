@@ -37,7 +37,8 @@
     font-family: inherit;
 
     display: grid;
-    grid-template-columns: 1fr 0.2fr;
+    grid-template-columns: auto 1fr 0.2fr;
+    column-gap: 0.5rem;
     align-items: center;
 
     &.checkmark::before {
@@ -47,12 +48,29 @@
       content: "\2713";
     }
 
+    &.checkmark .context-menu-item__icon {
+      display: none;
+    }
+
     &.dangerous {
-      .context-menu-item__label {
+      .context-menu-item__label,
+      .context-menu-item__icon {
         color: $color-red-7;
       }
     }
 
+    .context-menu-item__icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--default-icon-size);
+      height: var(--default-icon-size);
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
     .context-menu-item__label {
       justify-self: start;
       margin-inline-end: 20px;
@@ -70,7 +88,8 @@
     background-color: var(--select-highlight-color);
 
     &.dangerous {
-      .context-menu-item__label {
+      .context-menu-item__label,
+      .context-menu-item__icon {
         color: var(--popup-bg-color);
       }
       background-color: $color-red-6;
@@ -83,7 +102,9 @@
 
   @include isMobile {
     .context-menu-item {
-      display: block;
+      display: flex;
+      align-items: center;
+      column-gap: 0.5rem;
 
       .context-menu-item__label {
         margin-inline-end: 0;

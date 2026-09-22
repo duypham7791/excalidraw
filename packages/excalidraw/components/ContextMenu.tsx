@@ -95,6 +95,14 @@ export const ContextMenu = React.memo(
               }
             }
 
+            let icon: React.ReactNode = null;
+            if (item.icon) {
+              icon =
+                typeof item.icon === "function"
+                  ? item.icon(appState, elements)
+                  : item.icon;
+            }
+
             return (
               <li
                 key={idx}
@@ -115,6 +123,9 @@ export const ContextMenu = React.memo(
                     checkmark: item.checked?.(appState),
                   })}
                 >
+                  {icon && (
+                    <div className="context-menu-item__icon">{icon}</div>
+                  )}
                   <div className="context-menu-item__label">{label}</div>
                   <kbd className="context-menu-item__shortcut">
                     {actionName
